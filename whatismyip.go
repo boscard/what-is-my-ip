@@ -1,4 +1,4 @@
-package main
+package whatismyip
 
 import (
 	"fmt"
@@ -23,11 +23,4 @@ func GetClientsIPAddress(r *http.Request) string {
 func RespondWithPublicIPAddress(w http.ResponseWriter, r *http.Request) {
 	clinetsPublicIpAddress := GetClientsIPAddress(r)
 	fmt.Fprintf(w, "%v\n", clinetsPublicIpAddress)
-}
-
-func main() {
-	http.HandleFunc("/", RespondWithPublicIPAddress)
-	if err := http.ListenAndServe(":8080", nil); err != nil {
-		panic(err)
-	}
 }
