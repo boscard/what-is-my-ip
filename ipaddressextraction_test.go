@@ -9,7 +9,7 @@ import (
 
 type addressesNoProxy struct {
 	sourceAddress string
-	parsedAddress string
+	requiredAddress string
 }
 
 type addressesWithProxy struct {
@@ -48,8 +48,8 @@ func TestGetClientsIPAddressNoProxyHeader(t *testing.T) {
 		fakeRequest := httptest.NewRequest("GET", "http://1.2.3.4", nil)
 		fakeRequest.RemoteAddr = table.sourceAddress
 		ipAddress := GetClientsIPAddress(fakeRequest)
-		if ipAddress != table.parsedAddress {
-			t.Errorf("Requested from %v but got %v.",table.parsedAddress, ipAddress)
+		if ipAddress != table.requiredAddress {
+			t.Errorf("Requested from %v but got %v.",table.requiredAddress, ipAddress)
 		}
 	}
 }
@@ -75,10 +75,10 @@ func TestRespondWithPublicIPAddressNoProxyHeader(t *testing.T) {
 		response := w.Result()
 		body,_ := ioutil.ReadAll(response.Body)
 		if response.StatusCode != 200 {
-			t.Errorf("Requested from %v but got not OK code %v.",table.parsedAddress, response.StatusCode)
+			t.Errorf("Requested from %v but got not OK code %v.",table.requiredAddress, response.StatusCode)
 		}
-		if strings.TrimSpace(string(body)) != table.parsedAddress {
-			t.Errorf("Requested from %v but got %v.",table.parsedAddress, strings.TrimSpace(string(body)))
+		if strings.TrimSpace(string(body)) != table.requiredAddress {
+			t.Errorf("Requested from %v but got %v.",table.requiredAddress, strings.TrimSpace(string(body)))
 		}
 	}
 }
