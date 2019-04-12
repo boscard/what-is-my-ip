@@ -2,7 +2,7 @@ package main
 
 import (
 	"net/http"
-	"whatismyip/whatismyip"
+	"./whatismyip"
 )
 
 func main() {
