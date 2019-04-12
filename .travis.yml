@@ -10,6 +10,7 @@ install:
 before_script:
   - test-reporter before-build
 script:
+  - cd
   - pwd
   - ls -l
   - cd whatismyip && go test -coverprofile c.out
