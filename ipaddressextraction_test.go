@@ -1,4 +1,4 @@
-package whatismyip
+package main
 
 import (
 	"testing"
