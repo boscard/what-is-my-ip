@@ -10,6 +10,7 @@ install:
 before_script:
   - test-reporter before-build
 script:
-  - go test -coverprofile c.out
+  - cd whatismyip && go test -coverprofile c.out
+  - go build -o program
 after_script:
   - test-reporter after-build --coverage-input-type gocov --exit-code $TRAVIS_TEST_RESULT
