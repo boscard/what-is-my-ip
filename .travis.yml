@@ -1,8 +1,5 @@
 language: go
 go:
   - 1.11.x
-before:
-  - pwd ; ls -l 
 script:
-  - cd whatismyip && go test -coverprofile c.out
-  - go build -o program
+  - go test && go build
