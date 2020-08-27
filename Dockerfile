@@ -1,9 +1,9 @@
-FROM golang:1.11 AS go_builder
-RUN mkdir -p /go/src/whatismyip
-COPY ./ /go/src/whatismyip/
-RUN cd /go/src/whatismyip && go test && go build 
+FROM golang:1.13 AS go_builder
+RUN mkdir -p /go/src/github.com/boscard/what-is-my-ip
+COPY ./ /go/src/github.com/boscard/what-is-my-ip
+RUN cd /go/src/github.com/boscard/what-is-my-ip && go build
 
 FROM debian:stable-slim
-COPY --from=go_builder /go/src/whatismyip/whatismyip /bin/whatismyip
+COPY --from=go_builder /go/src/github.com/boscard/what-is-my-ip/what-is-my-ip /bin/what-is-my-ip
 EXPOSE 8080
-CMD ["/bin/whatismyip"]
+CMD ["/bin/what-is-my-ip"]
